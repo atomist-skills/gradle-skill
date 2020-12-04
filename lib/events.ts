@@ -256,7 +256,7 @@ const GradleGoalsStep: GradleStep = {
 		});
 		return status.success(
 			statusReason({
-				reason: `Gradle build of ${repo.owner}/${repo.name} succeeded`,
+				reason: `Gradle build succeeded`,
 				commit,
 				repo,
 			}),
