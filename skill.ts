@@ -31,7 +31,8 @@ export const Skill = skill<
 	description: "Run Gradle on your Java project",
 	displayName: "Gradle",
 	categories: [Category.DevOps],
-	iconUrl: "https://raw.githubusercontent.com/atomist-skills/gradle-skill/main/docs/images/icon.svg",
+	iconUrl:
+		"https://raw.githubusercontent.com/atomist-skills/gradle-skill/main/docs/images/icon.svg",
 
 	resourceProviders: {
 		github: resourceProvider.gitHub({ minRequired: 1 }),
