@@ -136,7 +136,7 @@ export const Skill = skill<
 			description:
 				"Cache and restore file system content between executions of this skill",
 			required: false,
-			defaultValue: [".gradle/caches/**"],
+			defaultValue: [".gradle/**"],
 			visibility: ParameterVisibility.Advanced,
 		},
 		repos: parameter.repoFilter(),
