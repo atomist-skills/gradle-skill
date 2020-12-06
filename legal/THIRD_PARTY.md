@@ -21,7 +21,7 @@ This page details all runtime dependencies of `@atomist/gradle-skill`.
 | [GPL-3.0](#gpl-30)              | 1     |
 | [ISC](#isc)                     | 50    |
 | [MIT AND Zlib](#mit-and-zlib)   | 1     |
-| [MIT](#mit)                     | 576   |
+| [MIT](#mit)                     | 577   |
 | [Public Domain](#public-domain) | 1     |
 | [Unlicense](#unlicense)         | 1     |
 
@@ -46,7 +46,7 @@ Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apa
 | Name                                  | Version         | Publisher             | Repository                                                                                                                       |
 | ------------------------------------- | --------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `@atomist/skill-logging`              | `0.2.6`         | Atomist               | [https://github.com/atomist-skills/skill-logging](https://github.com/atomist-skills/skill-logging)                               |
-| `@atomist/skill`                      | `0.6.2-main.17` | Atomist, Inc.         | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
+| `@atomist/skill`                      | `0.6.2-main.22` | Atomist, Inc.         | [https://github.com/atomist-skills/skill](https://github.com/atomist-skills/skill)                                               |
 | `@atomist/slack-messages`             | `1.2.1`         | Atomist               | [https://github.com/atomist/slack-messages](https://github.com/atomist/slack-messages)                                           |
 | `@google-cloud/common`                | `3.5.0`         | Google Inc.           | [https://github.com/googleapis/nodejs-common](https://github.com/googleapis/nodejs-common)                                       |
 | `@google-cloud/logging`               | `8.2.0`         | Google Inc.           | [https://github.com/googleapis/nodejs-logging](https://github.com/googleapis/nodejs-logging)                                     |
@@ -812,6 +812,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `yaeti`                                              | `0.0.6`         | Iñaki Baz Castillo             | [https://github.com/ibc/yaeti](https://github.com/ibc/yaeti)                                                                                                                                         |
 | `yargs`                                              | `15.4.1`        |                                | [https://github.com/yargs/yargs](https://github.com/yargs/yargs)                                                                                                                                     |
 | `yargs`                                              | `16.1.1`        |                                | [https://github.com/yargs/yargs](https://github.com/yargs/yargs)                                                                                                                                     |
+| `yargs`                                              | `16.2.0`        |                                | [https://github.com/yargs/yargs](https://github.com/yargs/yargs)                                                                                                                                     |
 | `yn`                                                 | `3.1.1`         | Sindre Sorhus                  | [https://github.com/sindresorhus/yn](https://github.com/sindresorhus/yn)                                                                                                                             |
 | `yocto-queue`                                        | `0.1.0`         | Sindre Sorhus                  | [https://github.com/sindresorhus/yocto-queue](https://github.com/sindresorhus/yocto-queue)                                                                                                           |
 
