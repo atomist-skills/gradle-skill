@@ -204,11 +204,16 @@ const GradleGoalsStep: GradleStep = {
 		const repo = eventRepo(ctx.data);
 		const commit = eventCommit(ctx.data);
 		const cfg = ctx.configuration?.parameters;
-		const args = tokenizeArgString(cfg.gradle || "build");
+		let args = tokenizeArgString(cfg.gradle || "build");
 		const options = [];
-		const command = (await fs.pathExists(params.project.path("gradlew")))
+		let command = (await fs.pathExists(params.project.path("gradlew")))
 			? "./gradlew"
 			: "gradle";
+		// Deal with user provided command in the args parameter
+		if (args[0] === "gradle" || args[0] === "./gradlew") {
+			command = args[0];
+			args = args.slice(1);
+		}
 
 		// Run gradle
 		const log = captureLog();
