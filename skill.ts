@@ -26,7 +26,12 @@ import {
 import { Configuration } from "./lib/configuration";
 
 export const Skill = skill<
-	Configuration & { repos: any; subscription_filter: any; env_map: any }
+	Configuration & {
+		repos: any;
+		subscription_filter: any;
+		ref_filter: any;
+		env_map: any;
+	}
 >({
 	description: "Run Gradle on your Java project",
 	displayName: "Gradle",
@@ -120,6 +125,10 @@ export const Skill = skill<
 			description: "Provide a `gradle.properties` file that will be used",
 			lineStyle: LineStyle.Multiple,
 			required: false,
+		},
+		ref_filter: {
+			...parameter.refFilter(),
+			visibility: ParameterVisibility.Advanced,
 		},
 		command: {
 			type: ParameterType.String,
