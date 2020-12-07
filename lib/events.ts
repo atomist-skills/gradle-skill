@@ -209,6 +209,7 @@ const GradleGoalsStep: GradleStep = {
 		let command = (await fs.pathExists(params.project.path("gradlew")))
 			? "./gradlew"
 			: "gradle";
+
 		// Deal with user provided command in the args parameter
 		if (args[0] === "gradle" || args[0] === "./gradlew") {
 			command = args[0];
