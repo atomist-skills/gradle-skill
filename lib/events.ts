@@ -225,7 +225,7 @@ const GradleGoalsStep: GradleStep = {
 				env: {
 					...process.env,
 					JAVA_HOME: "/opt/.sdkman/candidates/java/current",
-					PATH: `/opt/.sdkman/candidates/maven/current/bin:/opt/.sdkman/candidates/java/current/bin:${process.env.PATH}`,
+					PATH: `/opt/.sdkman/candidates/gradle/current/bin:/opt/.sdkman/candidates/java/current/bin:${process.env.PATH}`,
 				},
 				log,
 				logCommand: false,
