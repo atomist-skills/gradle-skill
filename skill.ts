@@ -133,6 +133,7 @@ export const Skill = skill<
 				"Create a GitHub check to indicate successful or failing builds",
 			required: false,
 			defaultValue: true,
+			visibility: ParameterVisibility.Advanced,
 		},
 		ref_filter: {
 			...parameter.refFilter(),
