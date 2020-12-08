@@ -126,6 +126,14 @@ export const Skill = skill<
 			lineStyle: LineStyle.Multiple,
 			required: false,
 		},
+		check: {
+			type: ParameterType.Boolean,
+			displayName: "GitHub check",
+			description:
+				"Create a GitHub check to indicate successful or failing builds",
+			required: false,
+			defaultValue: true,
+		},
 		ref_filter: {
 			...parameter.refFilter(),
 			visibility: ParameterVisibility.Advanced,

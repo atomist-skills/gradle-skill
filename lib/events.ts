@@ -96,12 +96,14 @@ const ValidateStep: GradleStep = {
 
 		// raise the check
 		const commit = eventCommit(ctx.data);
-		params.check = await github.createCheck(ctx, params.project.id, {
-			sha: commit.sha,
-			title: "gradle",
-			name: `${ctx.skill.name}/${ctx.configuration?.name}`,
-			body: "Running Gradle build",
-		});
+		if (ctx.configuration?.parameters?.check) {
+			params.check = await github.createCheck(ctx, params.project.id, {
+				sha: commit.sha,
+				title: "gradle",
+				name: `${ctx.skill.name}/${ctx.configuration?.name}`,
+				body: "Running Gradle build",
+			});
+		}
 		params.body = [];
 
 		return status.success();
@@ -121,7 +123,7 @@ const CommandStep: GradleStep = {
 		);
 		if (result.status !== 0) {
 			params.body.push(spawnFailure(result));
-			await params.check.update({
+			await params.check?.update({
 				conclusion: "failure",
 				body: params.body.join("\n\n---\n\n"),
 			});
@@ -136,7 +138,7 @@ const CommandStep: GradleStep = {
 		params.body.push(
 			`Setup command \`${trimDirectory(result.cmdString)}\` successful`,
 		);
-		await params.check.update({
+		await params.check?.update({
 			conclusion: undefined,
 			body: params.body.join("\n\n---\n\n"),
 		});
@@ -155,7 +157,7 @@ const PrepareStep: GradleStep = {
 			cfg.settings,
 		);
 
-		await params.check.update({
+		await params.check?.update({
 			conclusion: undefined,
 			body: params.body.join("\n\n---\n\n"),
 		});
@@ -176,7 +178,7 @@ const SetupNodeStep: GradleStep = {
 		]);
 		if (result.status !== 0) {
 			params.body.push(spawnFailure(result));
-			await params.check.update({
+			await params.check?.update({
 				conclusion: "failure",
 				body: params.body.join("\n\n---\n\n"),
 			});
@@ -190,7 +192,7 @@ const SetupNodeStep: GradleStep = {
 		}
 
 		params.body.push(`Installed JDK version \`${cfg.version}\``);
-		await params.check.update({
+		await params.check?.update({
 			conclusion: undefined,
 			body: params.body.join("\n\n---\n\n"),
 		});
@@ -236,7 +238,7 @@ const GradleGoalsStep: GradleStep = {
 			const home = process.env.ATOMIST_HOME || "/atm/home";
 			result.stderr = log.log;
 			params.body.push(spawnFailure(result));
-			await params.check.update({
+			await params.check?.update({
 				conclusion: "failure",
 				body: params.body.join("\n\n---\n\n"),
 				annotations: annotations.map(r => ({
@@ -258,7 +260,7 @@ const GradleGoalsStep: GradleStep = {
 			);
 		}
 		params.body.push(`\`${trimDirectory(result.cmdString)}\` successful`);
-		await params.check.update({
+		await params.check?.update({
 			conclusion: "success",
 			body: params.body.join("\n\n---\n\n"),
 		});
