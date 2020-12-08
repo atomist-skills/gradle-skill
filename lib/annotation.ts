@@ -22,7 +22,7 @@ const Matchers = [
 		severity: "error",
 		pattern: [
 			{
-				regexp: "(.*):([0-9]+):\\s(error):\\s(.*)",
+				regexp: "(.*):([0-9]+):\\s(error|warning):\\s(.*)",
 				groups: {
 					path: 1,
 					line: 2,
@@ -56,7 +56,10 @@ export function extractAnnotations(lines: string): Annotation[] {
 						path: match[pattern.groups.path],
 						line: match[pattern.groups.line],
 						column: 0,
-						severity: "failure",
+						severity:
+							match[pattern.groups.severity] === "warning"
+								? "warning"
+								: "failure",
 						message: match[pattern.groups.message],
 					});
 				}
