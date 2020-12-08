@@ -207,7 +207,6 @@ const GradleGoalsStep: GradleStep = {
 		const commit = eventCommit(ctx.data);
 		const cfg = ctx.configuration?.parameters;
 		let args = tokenizeArgString(cfg.gradle || "build");
-		const options = [];
 		let command = (await fs.pathExists(params.project.path("gradlew")))
 			? "./gradlew"
 			: "gradle";
@@ -222,7 +221,7 @@ const GradleGoalsStep: GradleStep = {
 		const log = captureLog();
 		const result = await params.project.spawn(
 			"bash",
-			["-c", [command, ...options, ...args].join(" ")],
+			["-c", [command, ...args].join(" ")],
 			{
 				env: {
 					...process.env,
