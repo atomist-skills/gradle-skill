@@ -221,8 +221,8 @@ const GradleGoalsStep: GradleStep = {
 		// Run gradle
 		const log = captureLog();
 		const result = await params.project.spawn(
-			command,
-			[...options, ...args],
+			"bash",
+			["-c", [command, ...options, ...args].join(" ")],
 			{
 				env: {
 					...process.env,
