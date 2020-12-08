@@ -95,8 +95,8 @@ const ValidateStep: GradleStep = {
 		}
 
 		// raise the check
-		const commit = eventCommit(ctx.data);
 		if (ctx.configuration?.parameters?.check) {
+			const commit = eventCommit(ctx.data);
 			params.check = await github.createCheck(ctx, params.project.id, {
 				sha: commit.sha,
 				title: "gradle",
