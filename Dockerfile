@@ -1,5 +1,5 @@
 # Set up build
-FROM node:lts AS build
+FROM node:lts@sha256:fe842f5b828c121514d62cbe0ace0927aec4f3130297180c3343e54e7ae97362 AS build
 
 WORKDIR /usr/src
 
@@ -9,7 +9,7 @@ RUN npm ci --no-optional && \
     npm run compile && \
     rm -rf node_modules .git
 
-FROM ubuntu:focal
+FROM ubuntu:focal@sha256:64255397e256fd33d6c6ddbc371027093315f9822089a32b8eeb045d83bb91c4
 
 # tools
 RUN apt-get update && apt-get install -y \
