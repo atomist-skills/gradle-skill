@@ -19,6 +19,7 @@ import {
 	EventContext,
 	EventHandler,
 	github,
+	log,
 	project,
 	repository,
 	runSteps,
@@ -27,7 +28,6 @@ import {
 	Step,
 	subscription,
 } from "@atomist/skill";
-import { WritableLog } from "@atomist/skill/src/lib/child_process";
 import * as fs from "fs-extra";
 
 import { extractAnnotations } from "./annotation";
@@ -120,7 +120,7 @@ const CommandStep: GradleStep = {
 		const result = await childProcess.spawnPromise(
 			"bash",
 			["-c", ctx.configuration.parameters.command],
-			{ log: childProcess.captureLog() },
+			{ log: childProcess.captureLog(log.info) },
 		);
 		if (result.status !== 0) {
 			params.body.push(spawnFailure(result));
@@ -173,10 +173,14 @@ const SetupNodeStep: GradleStep = {
 		const commit = eventCommit(ctx.data);
 		const cfg = ctx.configuration?.parameters;
 		// Set up jdk
-		const result = await params.project.spawn("bash", [
-			"-c",
-			`source $SDKMAN_DIR/bin/sdkman-init.sh && sdk install java ${cfg.version}`,
-		]);
+		const result = await params.project.spawn(
+			"bash",
+			[
+				"-c",
+				`source $SDKMAN_DIR/bin/sdkman-init.sh && sdk install java ${cfg.version}`,
+			],
+			{ level: "info" },
+		);
 		if (result.status !== 0) {
 			params.body.push(spawnFailure(result));
 			await params.check?.update({
@@ -219,7 +223,7 @@ const GradleGoalsStep: GradleStep = {
 		}
 
 		// Run gradle
-		const log = captureLog();
+		const resultLog = childProcess.captureLog(log.info);
 		const result = await params.project.spawn(
 			"bash",
 			["-c", [command, ...args].join(" ")],
@@ -229,14 +233,14 @@ const GradleGoalsStep: GradleStep = {
 					JAVA_HOME: "/opt/.sdkman/candidates/java/current",
 					PATH: `/opt/.sdkman/candidates/gradle/current/bin:/opt/.sdkman/candidates/java/current/bin:${process.env.PATH}`,
 				},
-				log,
+				log: resultLog,
 				logCommand: false,
 			},
 		);
-		const annotations = extractAnnotations(log.log);
+		const annotations = extractAnnotations(resultLog.log);
 		if (result.status !== 0 || annotations.length > 0) {
 			const home = process.env.ATOMIST_HOME || "/atm/home";
-			result.stderr = log.log;
+			result.stderr = resultLog.log;
 			params.body.push(spawnFailure(result));
 			await params.check?.update({
 				conclusion: "failure",
@@ -291,16 +295,3 @@ export const handler: EventHandler<
 		],
 		parameters: { body: [] },
 	});
-
-export function captureLog(): WritableLog & { log: string } {
-	const logLines = [];
-	return {
-		write: (msg): void => {
-			process.stdout.write(msg);
-			logLines.push(msg);
-		},
-		get log() {
-			return logLines.join("");
-		},
-	};
-}
