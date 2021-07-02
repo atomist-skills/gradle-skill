@@ -55,9 +55,9 @@
   "devDependencies": {
     "@atomist/npm-tools": "^0.1.1-main.0",
     "@google-cloud/functions-framework": "^1.9.0",
-    "@graphql-codegen/cli": "^1.21.5",
-    "@graphql-codegen/typescript": "^1.22.3",
-    "@graphql-codegen/typescript-operations": "^1.18.2",
+    "@graphql-codegen/cli": "^1.21.6",
+    "@graphql-codegen/typescript": "^1.22.4",
+    "@graphql-codegen/typescript-operations": "^1.18.3",
     "@types/fs-extra": "^9.0.11",
     "@types/mocha": "^8.2.2",
     "@types/power-assert": "^1.5.3",
@@ -69,7 +69,7 @@
     "eslint-plugin-deprecation": "^1.2.1",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "eslint-plugin-unused-imports": "^1.1.1",
+    "eslint-plugin-unused-imports": "^1.1.2",
     "espower-typescript": "^9.0.2",
     "graphql": "^15.5.1",
     "husky": "^4.3.5",
@@ -82,7 +82,7 @@
     "supervisor": "^0.12.0",
     "ts-node": "^9.1.1",
     "typedoc": "^0.20.37",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.5"
   },
   "husky": {
     "hooks": {
